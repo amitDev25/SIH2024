@@ -269,6 +269,18 @@ ul.messages * {
 #startButton:hover, #stopButton:hover{
   background-color: #f57db3;
   cursor: pointer;
+}
 
+#warnButton{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #e4dd00;
+  font-size: 1.05rem;
+  font-weight: bold;
+}
 
+#warnButton:hover{
+  background-color: #fef61d;
+  cursor: pointer;
 }
