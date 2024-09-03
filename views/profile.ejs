@@ -73,26 +73,65 @@
                 <div class="camera-buttons">
                     <button id="startButton">Start Camera</button>
                     <button id="stopButton">Stop Camera</button>
-                    
+                    <% if (user) { %>
+                        <% if (user.role==='ADMIN' ) { %>
+                            <button id="warnButton" onclick="sendEmail()">Send Warning</button>
+                            <% } %>
+
+                                <% } %>
+
                 </div>
 
             </main>
 
+            <script src="https://smtpjs.com/v3/smtp.js"></script>
+
             <script>
-                
+
                 document.getElementById('startButton').addEventListener('click', () => {
                     fetch('/start-python')
                         .then(response => response.text())
                         .then(data => alert(data))
                         .catch(error => alert('Error: ' + error));
                 });
-        
+
                 document.getElementById('stopButton').addEventListener('click', () => {
                     fetch('/stop-python')
                         .then(response => response.text())
                         .then(data => alert(data))
                         .catch(error => alert('Error: ' + error));
                 });
+
+
+                const personName = "<%= person.name %>";
+                const personEmail = "<%= person.email %>";
+
+
+                const sendEmail = () => {
+                    let name = personName
+                    let email = personEmail
+                    let Usermainbody = ` Dear ${name}, <br/><br/><br/> Thank you for reaching out to Techno Engineering. We've received your message and are currently reviewing it. We'll get back to you shortly with the information you requested. If you have any further questions or concerns, feel free to contact us directly by the contact information provided in the website. We appreciate your patience and look forward to assisting you soon. <br/><br/><br/> Best Regards, <br/> Techno Engineering `
+
+                    // console.log(mainbody)
+                    Email.send({
+                        Host: "smtp.elasticemail.com",
+                        Username: "it2022124@rcciit.org.in",
+                        Password: "ED397B318F79CFA8FDC17D502994EE605434",
+                        To: email,
+                        From: "it2022124@rcciit.org.in",
+                        Subject: "Regarding Clealiness of The Post Office",
+                        Body: Usermainbody
+                    }).then(
+                        message => alert("Your Message Has Been Sent Successfully")
+                    );
+
+
+
+
+                }
+
+
+
             </script>
 </body>
 
